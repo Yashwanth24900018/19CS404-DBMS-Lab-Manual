@@ -105,123 +105,193 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+-- Create a table named Products with the following constraints:
+
+ProductID should be the primary key.
+ProductName should be NOT NULL.
+Price is of real datatype and should be greater than 0.
+Stock is of integer datatype and should be greater than or equal to 0.
 
 ```sql
--- Paste your SQL code below for Question 1
+CREATE TABLE Products (
+    ProductID INTEGER PRIMARY KEY,
+    ProductName TEXT NOT NULL,
+    Price REAL CHECK (Price > 0),
+    Stock INTEGER CHECK (Stock >= 0)
+);
+
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1225" height="371" alt="image" src="https://github.com/user-attachments/assets/53e6667e-676c-4bd2-b96a-697fdccb2f1a" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+Write an SQL query to add a new column salary of type INTEGER to the Employees table, with a CHECK constraint that ensures the value in this column is greater than 0.
 
 ```sql
--- Paste your SQL code below for Question 2
+ALTER TABLE Employees
+ADD COLUMN salary INTEGER CHECK (salary > 0);
+
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1230" height="383" alt="image" src="https://github.com/user-attachments/assets/8b6372b9-3348-4de0-be33-bc56bb03c090" />
 
 **Question 3**
 ---
--- Paste Question 3 here
+Insert the following employees into the Employee table:
 
 ```sql
--- Paste your SQL code below for Question 3
+INSERT INTO Employee (EmployeeID, Name, Position, Department, Salary)
+VALUES
+(2, 'John Smith', 'Developer', 'IT', 75000),
+(3, 'Anna Bell', 'Designer', 'Marketing', 68000);
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="864" height="441" alt="image" src="https://github.com/user-attachments/assets/e2592e66-f9bf-4f83-8463-22323d99668e" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+Create a table named Bonuses with the following constraints:
 
 ```sql
--- Paste your SQL code below for Question 4
+CREATE TABLE Bonuses (
+    BonusID INTEGER PRIMARY KEY,
+    EmployeeID INTEGER,
+    BonusAmount REAL CHECK (BonusAmount > 0),
+    BonusDate DATE,
+    Reason TEXT NOT NULL,
+    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+);
+
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="868" height="368" alt="image" src="https://github.com/user-attachments/assets/e77cc5c4-ca31-4b21-92c0-44ebe3005dcf" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+Create a new table named item with the following specifications and constraints:
 
 ```sql
--- Paste your SQL code below for Question 5
+CREATE TABLE item (
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT(4),
+    FOREIGN KEY (icom_id)
+        REFERENCES company(com_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="860" height="438" alt="image" src="https://github.com/user-attachments/assets/f665780c-eba8-4339-a8f1-e7c1dfdc8dce" />
 
 **Question 6**
 ---
--- Paste Question 6 here
-
+Create a table named Shipments with the following constraints:
+ShipmentID as INTEGER should be the primary key.
+ShipmentDate as DATE.
+SupplierID as INTEGER should be a foreign key referencing Suppliers(SupplierID).
+OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 ```sql
--- Paste your SQL code below for Question 6
+CREATE TABLE Shipments (
+    ShipmentID INTEGER PRIMARY KEY,
+    ShipmentDate DATE,
+    SupplierID INTEGER,
+    OrderID INTEGER,
+    FOREIGN KEY (SupplierID)
+        REFERENCES Suppliers(SupplierID),
+    FOREIGN KEY (OrderID)
+        REFERENCES Orders(OrderID)
+);
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="864" height="319" alt="image" src="https://github.com/user-attachments/assets/fc8c4d9a-3444-4bb2-ab46-cdabbdae6cc0" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+Insert all students from Archived_students table into the Student_details table.
 
 ```sql
--- Paste your SQL code below for Question 7
+INSERT INTO Student_details
+SELECT *
+FROM Archived_students;
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="854" height="382" alt="image" src="https://github.com/user-attachments/assets/c274a164-ae4f-4727-b8ab-9dcac8030cb1" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Write an SQL command can to add a column named email of type TEXT to the customers table
+
 
 ```sql
--- Paste your SQL code below for Question 8
+ALTER TABLE Customers
+ADD COLUMN email TEXT;
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="871" height="381" alt="image" src="https://github.com/user-attachments/assets/04cac048-57c6-4b35-8baa-9d4713fb02c8" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Insert all products from Discontinued_products into Products.
+
+Table attributes are ProductID, ProductName, Price, Stock
 
 ```sql
--- Paste your SQL code below for Question 9
+INSERT INTO Products
+SELECT * 
+FROM Discontinued_products;
+
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="859" height="375" alt="image" src="https://github.com/user-attachments/assets/002d053f-be67-414f-9414-ed9f6f999fff" />
 
 **Question 10**
 ---
--- Paste Question 10 here
-
+Create a new table named products with the following specifications:
 ```sql
--- Paste your SQL code below for Question 10
+CREATE TABLE products (
+    product_id INTEGER PRIMARY KEY,
+    product_name TEXT NOT NULL,
+    list_price DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    CHECK (
+        list_price >= discount AND
+        discount >= 0 AND
+        list_price >= 0
+    )
+);
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="885" height="367" alt="image" src="https://github.com/user-attachments/assets/20c54326-d0ec-43be-9bac-f306dc8dcf5c" />
+
 
 
 ## RESULT
